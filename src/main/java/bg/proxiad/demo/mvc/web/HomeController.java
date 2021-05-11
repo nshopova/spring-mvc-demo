@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import bg.proxiad.demo.mvc.logic.Game;
 import bg.proxiad.demo.mvc.logic.GameService;
@@ -28,8 +28,8 @@ public class HomeController {
 		return "redirect:/games/" +game.getId();
 	}
 	
-	@GetMapping(value = "/games/{id}", params = "hint")
-	public String showGame(@PathVariable String id, @RequestAttribute(value = "hint", required = false) Boolean hint, Model model) {
+	@GetMapping(value = "/games/{id}")
+	public String showGame(@PathVariable String id, @RequestParam(required = false) Boolean hint, Model model) {
 		System.out.println("Show game: " + id);
 		System.out.println("Use hint: " + hint);
 		Game game = gameService.getGame(id);
